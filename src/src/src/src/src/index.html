@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#020814" />
+    <meta
+      name="description"
+      content="ASTRA — Astronaut Health Intelligence System. Immersive first-person astronaut vision HUD with live camera, simulated health telemetry, AI copilot and emergency mode."
+    />
+    <meta name="author" content="ASTRA Team" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta property="og:title" content="ASTRA — Astronaut Health Intelligence" />
+    <meta
+      property="og:description"
+      content="Enter astronaut vision — immersive first-person helmet HUD over live camera."
+    />
+    <meta property="og:type" content="website" />
+    <title>ASTRA — Astronaut Health Intelligence System</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23020814'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%2334e7ff' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2334e7ff'/%3E%3C/svg%3E"
+    />
+    <style>
+      /* Prevent flash of unstyled content before main CSS loads */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #020814;
+        overflow: hidden;
+      }
+      #app-root {
+        position: fixed;
+        inset: 0;
+      }
+      .boot-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #020814;
+        color: #34e7ff;
+        font-family: monospace;
+        font-size: 0.9rem;
+        letter-spacing: 0.3em;
+        z-index: 9999;
+      }
+      .boot-loader::before {
+        content: '';
+        width: 60px;
+        height: 60px;
+        border: 2px solid rgba(52, 231, 255, 0.2);
+        border-top-color: #34e7ff;
+        border-radius: 50%;
+        margin-bottom: 1.5rem;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .boot-loader.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Boot loader shown until JS mounts the app -->
+    <div class="boot-loader" id="boot-loader">ASTRA · INITIALIZING</div>
+
+    <!-- Main application mount point -->
+    <div id="app-root"></div>
+
+    <!-- Entry point — Vite bundles and serves this module -->
+    <script type="module" src="/src/main.ts"></script>
+
+    <!-- Remove boot loader once the module has run -->
+    <script>
+      window.addEventListener('load', function () {
+        // Small delay to let main.ts mount the first view
+        setTimeout(function () {
+          var loader = document.getElementById('boot-loader');
+          if (loader) loader.classList.add('hidden');
+        }, 100);
+      });
+    </script>
+
+    <!-- Accessibility live region fallback (main.ts also creates one) -->
+    <noscript>
+      <div
+        style="
+          position: fixed;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #020814;
+          color: #34e7ff;
+          font-family: monospace;
+          text-align: center;
+          padding: 2rem;
+          z-index: 10000;
+        "
+      >
+        ASTRA requires JavaScript to run the immersive astronaut vision system.<br />
+        Please enable JavaScript and reload the page.
+      </div>
+    </noscript>
+  </body>
+</html>
